@@ -37,10 +37,10 @@ The application is fully responsive and intuitive to use.
 ## Screenshots
 
 ### Homepage Image
-![Homepage Image]()
+![Homepage Image](./public/images/home-page.PNG)
 
 ### Dashboard Image
-![Dashboard image]()
+![Dashboard image](./public/images/Dashboard.PNG)
 
 
 ## Installation

@@ -10,7 +10,7 @@ router.post('/', withAuth, async (req, res) => {
       // doing the spread makes a copy of all the object properties
       // and adding a new property, user_id
       ...req.body,
-      user_id: req.session.user_id,
+      userId: req.session.userId,
       // TODO:- DONE SET USERID userId TO SESSION LOGGEDIN USERID
     });
     res.json(newComment);

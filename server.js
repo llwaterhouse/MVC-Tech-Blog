@@ -19,7 +19,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 // Set up session middleware
 const sess = {
   secret: 'Super secret secret',
-  cookie: {},
+  cookie: {maxAge: 300000},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({

@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 
 		const posts = postData.map((post) => post.get({ plain: true }));
 
-		res.render('all-posts', { posts });
+		res.render('all-posts', { posts, loggedIn: req.session.loggedIn });
 	} catch (err) {
 		res.status(500).json(err);
 	}
@@ -32,7 +32,9 @@ router.get('/post/:id', async (req, res) => {
 						model: User
 					},
 					{
-						model: Comment
+						model: Comment,
+						include: [User]
+
 					}
 				]
 			}
@@ -40,8 +42,7 @@ router.get('/post/:id', async (req, res) => {
 
 		if (postData) {
 			const post = postData.get({ plain: true });
-
-			res.render('single-post', { post });
+			res.render('single-post', { post, loggedIn: req.session.loggedIn });
 		} else {
 			res.status(404).end();
 		}

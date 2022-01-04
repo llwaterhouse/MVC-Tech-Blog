@@ -12,7 +12,7 @@ const loginFormHandler = async function(event) {
     }),
     headers: { 'Content-Type': 'application/json' },
   });
-console.log("In loginFormHandler");
+console.log("In loginFormHandler uname: ", usernameEl.value);
   if (response.ok) {
     document.location.replace('/dashboard');
     console.log("in response OK");

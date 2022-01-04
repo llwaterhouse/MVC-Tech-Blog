@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const chalk = require ('chalk');
 
-// URL: /api/user
+// URL: /api/user   Signup goes here. Auto log in
 router.post('/', async (req, res) => {
   try {
     const newUser = await User.create({
@@ -15,12 +15,14 @@ router.post('/', async (req, res) => {
 
     req.session.save(() => {
       // TODO: SET USERID userId IN REQUEST SESSION TO ID RETURNED FROM DATABASE
-        req.session.user_id= newUser.id;
+        req.session.userId= newUser.id;
+
       // TODO: SET USERNAME username IN REQUEST SESSION TO USERNAME RETURNED FROM DATABASE
         req.session.username = newUser.username;
       // TODO: SET LOGGEDIN loggedIn TO TRUE IN REQUEST SESSION
         req.session.loggedIn = true;
       res.json(newUser);
+      // console.log("session created ", req.session);
     });
   } catch (err) {
     res.status(500).json(err);
@@ -30,7 +32,7 @@ router.post('/', async (req, res) => {
 
 // URL: /api/user/login
 router.post('/login', async (req, res) => {
-  console.log (chalk.blue("in /api/user/login"));
+  // console.log (chalk.blue("in /api/user/login"));
   try {
     const user = await User.findOne({
       where: {
@@ -52,7 +54,8 @@ router.post('/login', async (req, res) => {
 
     req.session.save(() => {
       // TODO: SET USERID userId IN REQUEST SESSION TO ID RETURNED FROM DATABASE
-        req.session.user_id = user.id;
+        req.session.userId = user.id;
+        req.session.test = "Test";
 
       // TODO: SET USERNAME username IN REQUEST SESSION TO USERNAME RETURNED FROM DATABASE
         req.session.username = user.username;

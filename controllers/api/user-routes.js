@@ -44,22 +44,22 @@ router.post('/login', async (req, res) => {
       res.status(400).json({ message: 'No user account found!' });
       return;
     }
-    console.log (chalk.blue("/api/user/login user ", {user}));
+  
     const validPassword = user.checkPassword(req.body.password);
-    console.log (chalk.blue("/api/user/login req.body ", req.body.password));
+    // console.log (chalk.blue("/api/user/login req.body ", req.body.password));
     if (!validPassword) {
       res.status(400).json({ message: 'No user account found!' });
       return;
     }
 
     req.session.save(() => {
-      // TODO: SET USERID userId IN REQUEST SESSION TO ID RETURNED FROM DATABASE
+      // TODO: done SET USERID userId IN REQUEST SESSION TO ID RETURNED FROM DATABASE
         req.session.userId = user.id;
         req.session.test = "Test";
 
-      // TODO: SET USERNAME username IN REQUEST SESSION TO USERNAME RETURNED FROM DATABASE
+      // TODO: done SET USERNAME username IN REQUEST SESSION TO USERNAME RETURNED FROM DATABASE
         req.session.username = user.username;
-      // TODO: SET LOGGEDIN loggedIn TO TRUE IN REQUEST SESSION
+      // TODO: done SET LOGGEDIN loggedIn TO TRUE IN REQUEST SESSION
         req.session.loggedIn = true;
 
       res.json({ user, message: 'You are now logged in!' });
